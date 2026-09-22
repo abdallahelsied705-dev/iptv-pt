@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Icon } from "@/components/icon";
 import { contactInfo } from "@/lib/site-data";
 import { gaEvent } from "@/lib/gtag";
+import { siteConfig } from "@/config/site";
 
 type Plan = {
   id: string;
@@ -38,9 +39,9 @@ export function PriceCard({ plan }: { plan: Plan }) {
   const total = basePrice + extraDevices * extraPrice;
 
   const message =
-    `Olá! Quero subscrever o plano ${plan.name} (${plan.durationLabel}) ` +
-    `para ${devices} dispositivo${devices > 1 ? "s" : ""} em simultâneo. ` +
-    `Preço estimado: €${toPt(total)}${plan.period}.`;
+    `Hello! I want to subscribe to the ${plan.name} plan (${plan.durationLabel}) ` +
+    `on ${siteConfig.name} for ${devices} device${devices > 1 ? "s" : ""} simultaneously. ` +
+    `Estimated price: €${toPt(total)}${plan.period}.`;
 
   const whatsappHref = `${contactInfo.whatsappLink}?text=${encodeURIComponent(message)}`;
 
