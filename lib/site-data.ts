@@ -216,16 +216,10 @@ export const devicesList: DeviceEntry[] = [
 ];
 
 /**
- * Preços base calculados a partir da média observada em fornecedores IPTV
- * focados no mercado português (pesquisa de mercado, setembro 2026):
- * mensal €7–13, trimestral €20–25, semestral €35–40, anual €45–60.
- *
- * extraDevicePrice: baseado em tabelas reais de preço por dispositivo extra
- * de dois fornecedores portugueses (setembro 2026):
- * - portugals-iptv.com: 1→2 dispositivos = +15€/3 meses, +15-20€/6 meses, +30-40€/12 meses
- * - lista-iptv-portugal.com: 1 ecrã 35€/ano → 2 ecrãs 65€/ano (+30€/ano)
- * Valores usados abaixo são a média destes pontos, arredondada.
- * Ajustar quando o preço de custo real dos servidores for definido.
+ * Preços finais definidos (setembro 2026): mensal €15, trimestral €46,
+ * semestral €100, anual €169 — cada um já corresponde ao número de
+ * dispositivos base do plano (1, 2, 3 e 4 respetivamente).
+ * extraDevicePrice: custo por dispositivo adicional além do incluído no plano.
  */
 type PricingPlan = {
   id: string;
@@ -246,77 +240,91 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: "mensal",
     name: "Mensal",
-    price: "9,99",
+    price: "15,00",
     period: "/mês",
     billedNote: "Faturado mensalmente",
     highlight: false,
     cta: "Escolher Mensal",
     baseDevices: 1,
-    extraDevicePrice: "5,99",
+    extraDevicePrice: "9,00",
     durationLabel: "1 mês",
     features: [
-      "+20.000 canais ao vivo",
-      "Filmes e séries VOD",
-      "Qualidade Full HD / 4K",
-      "1 dispositivo em simultâneo",
-      "Suporte em português",
+      "Qualidade de streaming 4K Ultra HD",
+      "Mais de 25.000 canais em direto no mundo",
+      "Mais de 120.000 filmes e séries",
+      "Eventos PPV premium incluídos",
+      "Acesso instantâneo ao catálogo VOD",
+      "EPG inteligente e Catch-Up TV",
+      "Suporte 24/7 em português",
+      "Compatibilidade com vários dispositivos",
     ],
   },
   {
     id: "trimestral",
     name: "Trimestral",
-    price: "24,99",
+    price: "46,00",
     period: "/3 meses",
-    billedNote: "≈ €8,33/mês",
+    billedNote: "≈ €15,33/mês",
     highlight: true,
     badge: "Mais escolhido",
     cta: "Escolher Trimestral",
     baseDevices: 2,
-    extraDevicePrice: "14,99",
+    extraDevicePrice: "13,00",
     durationLabel: "3 meses",
     features: [
-      "Tudo do plano Mensal",
-      "2 dispositivos em simultâneo",
-      "Guia EPG completo 7 dias",
-      "Canais desportivos premium",
-      "Troca de servidor grátis",
+      "Qualidade de streaming 4K Ultra HD",
+      "Mais de 25.000 canais em direto no mundo",
+      "Mais de 120.000 filmes e séries",
+      "Eventos PPV premium incluídos",
+      "Acesso instantâneo ao catálogo VOD",
+      "EPG inteligente e Catch-Up TV",
+      "Suporte 24/7 em português",
+      "Compatibilidade com vários dispositivos",
     ],
   },
   {
     id: "semestral",
     name: "Semestral",
-    price: "39,99",
+    price: "100,00",
     period: "/6 meses",
-    billedNote: "≈ €6,67/mês",
+    billedNote: "≈ €16,67/mês",
     highlight: false,
     cta: "Escolher Semestral",
     baseDevices: 3,
-    extraDevicePrice: "17,99",
+    extraDevicePrice: "20,00",
     durationLabel: "6 meses",
     features: [
-      "Tudo do plano Trimestral",
-      "3 dispositivos em simultâneo",
-      "Catch-up TV até 7 dias",
-      "Prioridade no suporte",
+      "Qualidade de streaming 4K Ultra HD",
+      "Mais de 25.000 canais em direto no mundo",
+      "Mais de 120.000 filmes e séries",
+      "Eventos PPV premium incluídos",
+      "Acesso instantâneo ao catálogo VOD",
+      "EPG inteligente e Catch-Up TV",
+      "Suporte 24/7 em português",
+      "Compatibilidade com vários dispositivos",
     ],
   },
   {
     id: "anual",
     name: "Anual",
-    price: "59,99",
+    price: "169,00",
     period: "/ano",
-    billedNote: "≈ €5,00/mês",
+    billedNote: "≈ €14,08/mês",
     highlight: false,
     badge: "Melhor valor",
     cta: "Escolher Anual",
     baseDevices: 4,
-    extraDevicePrice: "32,99",
+    extraDevicePrice: "25,00",
     durationLabel: "12 meses",
     features: [
-      "Tudo do plano Semestral",
-      "4 dispositivos em simultâneo",
-      "Poupa mais de €500/ano vs. TV por cabo",
-      "Garantia de reembolso 7 dias",
+      "Qualidade de streaming 4K Ultra HD",
+      "Mais de 25.000 canais em direto no mundo",
+      "Mais de 120.000 filmes e séries",
+      "Eventos PPV premium incluídos",
+      "Acesso instantâneo ao catálogo VOD",
+      "EPG inteligente e Catch-Up TV",
+      "Suporte 24/7 em português",
+      "Compatibilidade com vários dispositivos",
     ],
   },
 ];
@@ -381,7 +389,7 @@ export const howItWorks = [
 ] as const;
 
 export const comparisonRows = [
-  { label: "Preço médio mensal", iptv: "Desde €5–10", cable: "€35–90" },
+  { label: "Preço médio mensal", iptv: "Desde €15", cable: "€35–90" },
   { label: "Fidelização", iptv: "Sem contrato", cable: "12–24 meses" },
   { label: "Canais desportivos extra", iptv: "Incluídos", cable: "Pacote adicional pago" },
   { label: "Dispositivos suportados", iptv: "Smart TV, box, telemóvel, PC", cable: "Apenas com equipamento da operadora" },
