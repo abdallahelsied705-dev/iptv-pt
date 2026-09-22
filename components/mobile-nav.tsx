@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/lib/site-data";
@@ -15,6 +16,23 @@ export function MobileNav() {
     };
   }, [open]);
 
+  const panel = (
+    <div className="mobile-nav-panel" role="dialog" aria-modal="true">
+      <nav aria-label="Navegação móvel">
+        {navLinks.map((link) => (
+          <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            {link.label}
+          </Link>
+        ))}
+        <Link href="/sobre-nos" onClick={() => setOpen(false)}>Sobre Nós</Link>
+        <Link href="/contacto" onClick={() => setOpen(false)}>Contacto</Link>
+      </nav>
+      <Link className="button primary mobile-nav-cta" href="/planos" onClick={() => setOpen(false)}>
+        Ver planos <span>→</span>
+      </Link>
+    </div>
+  );
+
   return (
     <div className="mobile-nav">
       <button
@@ -27,22 +45,7 @@ export function MobileNav() {
         {open ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      {open && (
-        <div className="mobile-nav-panel" role="dialog" aria-modal="true">
-          <nav aria-label="Navegação móvel">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
-                {link.label}
-              </Link>
-            ))}
-            <Link href="/sobre-nos" onClick={() => setOpen(false)}>Sobre Nós</Link>
-            <Link href="/contacto" onClick={() => setOpen(false)}>Contacto</Link>
-          </nav>
-          <Link className="button primary mobile-nav-cta" href="/planos" onClick={() => setOpen(false)}>
-            Ver planos <span>→</span>
-          </Link>
-        </div>
-      )}
+      {open && createPortal(panel, document.body)}
     </div>
   );
 }
