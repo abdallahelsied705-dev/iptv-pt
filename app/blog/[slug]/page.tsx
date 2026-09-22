@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { BlogCover } from "@/components/blog-cover";
-import { ArticleParagraph } from "@/components/article-paragraph";
+import { ArticleBlock } from "@/components/article-paragraph";
 import { blogPosts, isPublished, getPublishedPosts } from "@/lib/site-data";
 import { siteConfig } from "@/config/site";
 
@@ -70,13 +70,36 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
     ],
   };
 
-  const firstHalf = post.content.slice(0, 2);
-  const secondHalf = post.content.slice(2);
+  // As secções "h3 seguido de p" dentro do artigo funcionam como perguntas
+  // e respostas — expostas aqui como FAQPage para motores de resposta (IA) e rich results.
+  const articleFaqs: { q: string; a: string }[] = [];
+  post.content.forEach((block, i) => {
+    if (block.type === "h3") {
+      const next = post.content[i + 1];
+      if (next?.type === "p") articleFaqs.push({ q: block.text, a: next.text });
+    }
+  });
+  const faqSchema = articleFaqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: articleFaqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  } : null;
+
+  const splitIndex = Math.ceil(post.content.length / 2);
+  const firstHalf = post.content.slice(0, splitIndex);
+  const secondHalf = post.content.slice(splitIndex);
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faqSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
       <SiteHeader />
       <main>
         <article className="section shell article">
@@ -92,8 +115,8 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
           <BlogCover post={post} variant="article" priority />
 
           <div className="article-body">
-            {firstHalf.map((paragraph, i) => (
-              <ArticleParagraph key={i} text={paragraph} />
+            {firstHalf.map((block, i) => (
+              <ArticleBlock key={i} block={block} />
             ))}
           </div>
 
@@ -105,8 +128,8 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
           )}
 
           <div className="article-body">
-            {secondHalf.map((paragraph, i) => (
-              <ArticleParagraph key={i} text={paragraph} />
+            {secondHalf.map((block, i) => (
+              <ArticleBlock key={i} block={block} />
             ))}
           </div>
 

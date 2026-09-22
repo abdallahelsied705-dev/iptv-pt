@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import type { ContentBlock } from "@/lib/site-data";
 
 const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g;
 
@@ -36,6 +37,22 @@ function renderWithLinks(text: string): ReactNode[] {
   return parts;
 }
 
-export function ArticleParagraph({ text }: { text: string }) {
-  return <p>{renderWithLinks(text)}</p>;
+export function ArticleBlock({ block }: { block: ContentBlock }) {
+  switch (block.type) {
+    case "h2":
+      return <h2>{renderWithLinks(block.text)}</h2>;
+    case "h3":
+      return <h3>{renderWithLinks(block.text)}</h3>;
+    case "ul":
+      return (
+        <ul>
+          {block.items.map((item, i) => (
+            <li key={i}>{renderWithLinks(item)}</li>
+          ))}
+        </ul>
+      );
+    case "p":
+    default:
+      return <p>{renderWithLinks(block.text)}</p>;
+  }
 }
