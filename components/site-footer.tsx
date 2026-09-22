@@ -33,9 +33,9 @@ export function SiteFooter() {
         <div>
           <h4>Legal</h4>
           <p className="footer-legal">
-            A tecnologia IPTV é legal em Portugal. A disponibilidade de conteúdos depende dos
-            direitos de transmissão detidos por cada fornecedor. Consulta sempre os termos de
-            utilização antes de subscrever.
+            A tecnologia <Link href="/blog/iptv-e-legal-em-portugal">IPTV é legal em Portugal</Link>. A
+            disponibilidade de conteúdos depende dos direitos de transmissão detidos por cada
+            fornecedor. Consulta sempre os termos de utilização antes de subscrever.
           </p>
           <Link href="/termos-e-condicoes">Termos e Condições</Link>
           <Link href="/politica-de-privacidade">Política de Privacidade</Link>
