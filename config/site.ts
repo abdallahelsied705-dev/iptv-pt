@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "IPTV Portugal",
   domain: "iptv-pt.pt",
-  url: "https://www.iptv-pt.pt",
+  url: "https://iptv-pt.pt",
   locale: "pt_PT",
-  title: "IPTV Portugal: Planos, Dispositivos e Guias",
+  title: "IPTV Portugal 2026: +25.000 Canais desde €15/mês",
   description:
-    "Informação clara sobre IPTV em Portugal, planos, dispositivos compatíveis, aplicações e guias de configuração em português.",
+    "Mais de 25.000 canais ao vivo e filmes/séries em 4K, desde €15/mês. Instalação em minutos, sem fidelização, suporte real por WhatsApp em português.",
 };
