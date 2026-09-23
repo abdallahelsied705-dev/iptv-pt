@@ -15,7 +15,7 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: { default: siteConfig.title, template: "%s | IPTV PT" },
+  title: { default: siteConfig.title, template: `%s | ${siteConfig.name}` },
   description: siteConfig.description,
   alternates: { canonical: "/" },
   openGraph: {
