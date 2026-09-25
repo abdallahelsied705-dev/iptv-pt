@@ -8,6 +8,11 @@ export const contactInfo = {
   email: "suporte@iptv-pt.pt",
 } as const;
 
+/** Link do WhatsApp com o nome do site no início, para saber de que site vem cada pedido. */
+export function whatsappUrl(message: string) {
+  return `${contactInfo.whatsappLink}?text=${encodeURIComponent(`🌐 Site: iptv-pt.pt\n\n${message}`)}`;
+}
+
 export const navLinks = [
   { href: "/#vantagens", label: "Vantagens" },
   { href: "/#canais", label: "Canais" },

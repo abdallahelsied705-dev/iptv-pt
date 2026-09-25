@@ -8,16 +8,9 @@ import { ArticleBlock } from "@/components/article-paragraph";
 import { blogPosts, isPublished, getPublishedPosts } from "@/lib/site-data";
 import { siteConfig } from "@/config/site";
 
-// Revalida a cada hora — um artigo agendado (data futura) passa a ficar
-// acessível sozinho assim que a data chega, sem novo deploy.
-export const revalidate = 3600;
-
-export function generateStaticParams() {
-  // Gera as páginas de TODOS os posts, incluindo agendados para o futuro —
-  // ficam prontas como 404 até à data de publicação, altura em que o ISR
-  // as regenera automaticamente como publicadas.
-  return blogPosts.map((post) => ({ slug: post.slug }));
-}
+// Renderizado a cada pedido: um artigo agendado fica acessível assim que a
+// data chega. Com ISR a página ficava presa em 404 depois da data.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(
   props: PageProps<"/blog/[slug]">

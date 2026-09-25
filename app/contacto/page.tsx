@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Reveal } from "@/components/reveal";
 import { Icon } from "@/components/icon";
 import { WhatsAppGlyph, TelegramGlyph } from "@/components/brand-icons";
-import { contactInfo } from "@/lib/site-data";
+import { contactInfo, whatsappUrl } from "@/lib/site-data";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ const channels = [
     icon: <WhatsAppGlyph size={22} />,
     title: "WhatsApp",
     text: "A forma mais rápida de falar connosco — respostas normalmente em minutos.",
-    href: contactInfo.whatsappLink,
+    href: whatsappUrl("Olá! 👋 Gostaria de falar com o suporte do IPTV Portugal."),
     cta: "Abrir WhatsApp",
   },
   {

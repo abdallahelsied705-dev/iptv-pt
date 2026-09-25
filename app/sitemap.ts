@@ -2,9 +2,8 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { getPublishedPosts } from "@/lib/site-data";
 
-// Revalida a cada hora — artigos agendados entram no sitemap sozinhos
-// assim que a data de publicação chega, sem novo deploy.
-export const revalidate = 3600;
+// Gerado a cada pedido — artigos agendados entram no sitemap no dia da publicação.
+export const dynamic = "force-dynamic";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

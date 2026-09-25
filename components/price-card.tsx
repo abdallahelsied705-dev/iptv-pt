@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Icon } from "@/components/icon";
-import { contactInfo } from "@/lib/site-data";
+import { whatsappUrl } from "@/lib/site-data";
 import { gaEvent } from "@/lib/gtag";
 import { siteConfig } from "@/config/site";
 
@@ -39,11 +39,11 @@ export function PriceCard({ plan }: { plan: Plan }) {
   const total = basePrice + extraDevices * extraPrice;
 
   const message =
-    `Hello! I want to subscribe to the ${plan.name} plan (${plan.durationLabel}) ` +
-    `on ${siteConfig.name} for ${devices} device${devices > 1 ? "s" : ""} simultaneously. ` +
-    `Estimated price: €${toPt(total)}${plan.period}.`;
+    `Olá! 👋 Quero subscrever o plano ${plan.name} (${plan.durationLabel}) ` +
+    `do ${siteConfig.name} para ${devices} dispositivo${devices > 1 ? "s" : ""} em simultâneo.\n\n` +
+    `💰 Preço: €${toPt(total)}${plan.period}\n\nGostaria de receber o link de pagamento.`;
 
-  const whatsappHref = `${contactInfo.whatsappLink}?text=${encodeURIComponent(message)}`;
+  const whatsappHref = whatsappUrl(message);
 
   return (
     <article className={`price-card${plan.highlight ? " price-card-highlight" : ""}`}>

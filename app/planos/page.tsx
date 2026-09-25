@@ -8,7 +8,7 @@ import { FaqSection } from "@/components/faq-section";
 import { PricingStructuredData } from "@/components/pricing-structured-data";
 
 export const metadata: Metadata = {
-  title: "Planos e Preços IPTV Portugal | IPTV PT",
+  title: "Planos e Preços IPTV Portugal",
   description:
     "Consulta os planos IPTV PT: mensal, trimestral, semestral e anual. Preços claros, sem fidelização, com canais portugueses, desporto e VOD incluídos.",
   alternates: { canonical: "/planos" },
