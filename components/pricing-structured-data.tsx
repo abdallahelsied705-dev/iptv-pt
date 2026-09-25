@@ -22,6 +22,14 @@ export function productSchema(offerUrl: string) {
       itemCondition: "https://schema.org/NewCondition",
       url: offerUrl,
       seller: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "PT",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 7,
+        returnFees: "https://schema.org/FreeReturn",
+        url: `${siteConfig.url}/politica-de-reembolso`,
+      },
       // Serviço digital: ativação online, sem envio físico.
       shippingDetails: {
         "@type": "OfferShippingDetails",

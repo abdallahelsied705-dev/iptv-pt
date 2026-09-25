@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export default function PoliticaDeReembolsoPage() {
   return (
-    <LegalPage title="Política de Reembolso" updated="21 de setembro de 2026" breadcrumbLabel="Política de Reembolso">
+    <LegalPage title="Política de Reembolso" updated="25 de setembro de 2026" breadcrumbLabel="Política de Reembolso">
       <p>
-        Queremos que testes o serviço com confiança. Esta página resume as condições em que um
-        reembolso pode ser pedido.
+        Queremos que testes o serviço com confiança. Tens <strong>7 dias</strong> após a ativação
+        para pedir o reembolso. Esta página resume as condições em que o reembolso pode ser pedido.
       </p>
 
       <h2>1. Problemas técnicos comprovados</h2>
       <p>
         Se o serviço não funcionar corretamente no teu dispositivo (após tentativa de suporte
         técnico para resolver o problema) e não conseguirmos resolver a situação, tens direito a
-        reembolso total dentro do prazo indicado no teu plano.
+        reembolso total nos primeiros 7 dias após a ativação.
       </p>
 
       <h2>2. Erro de ativação</h2>
@@ -35,7 +35,8 @@ export default function PoliticaDeReembolsoPage() {
       <p>
         Recomendamos sempre testar a estabilidade do serviço antes de escolheres um plano longo
         (semestral ou anual). Pedidos de reembolso por simples mudança de ideias, sem problema
-        técnico associado, são avaliados caso a caso — contacta-nos e conversamos.
+        técnico associado, feitos nos primeiros 7 dias, são avaliados caso a caso — contacta-nos
+        e conversamos.
       </p>
 
       <h2>4. Como pedir um reembolso</h2>
