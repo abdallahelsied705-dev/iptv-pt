@@ -15,9 +15,7 @@ export default function PoliticaDePrivacidadePage() {
     <LegalPage title="Política de Privacidade" updated="21 de setembro de 2026" breadcrumbLabel="Política de Privacidade">
       <p>
         Esta página explica, em linguagem simples, que dados recolhemos quando visitas ou usas o
-        IPTV PT, para que servem e que direitos tens sobre eles. Este texto é um modelo informativo
-        de base — recomendamos que seja revisto por um advogado antes do lançamento oficial do site,
-        para garantir conformidade total com o RGPD e a legislação portuguesa aplicável.
+        IPTV PT, para que servem e que direitos tens sobre eles.
       </p>
 
       <h2>1. Que dados recolhemos</h2>

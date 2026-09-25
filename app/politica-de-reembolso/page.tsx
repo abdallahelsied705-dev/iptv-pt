@@ -15,8 +15,7 @@ export default function PoliticaDeReembolsoPage() {
     <LegalPage title="Política de Reembolso" updated="21 de setembro de 2026" breadcrumbLabel="Política de Reembolso">
       <p>
         Queremos que testes o serviço com confiança. Esta página resume as condições em que um
-        reembolso pode ser pedido. Este texto é um modelo informativo de base — ajusta os prazos e
-        condições exatas à tua operação real antes de publicares, e considera revisão jurídica.
+        reembolso pode ser pedido.
       </p>
 
       <h2>1. Problemas técnicos comprovados</h2>

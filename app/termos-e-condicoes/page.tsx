@@ -13,10 +13,7 @@ export default function TermosECondicoesPage() {
   return (
     <LegalPage title="Termos e Condições" updated="21 de setembro de 2026" breadcrumbLabel="Termos e Condições">
       <p>
-        Ao subscreveres um plano do IPTV PT, aceitas os termos descritos nesta página. Este texto é
-        um modelo informativo de base — recomendamos revisão por um advogado antes do lançamento
-        oficial, sobretudo quanto às cláusulas de responsabilidade e à conformidade com a Lei n.º
-        82/2021.
+        Ao subscreveres um plano do IPTV PT, aceitas os termos descritos nesta página.
       </p>
 
       <h2>1. Natureza do serviço</h2>
