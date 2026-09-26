@@ -221,23 +221,19 @@ export const devicesList: DeviceEntry[] = [
 ];
 
 /**
- * Preços finais definidos (setembro 2026): mensal €15, trimestral €46,
- * semestral €100, anual €169 — cada um já corresponde ao número de
- * dispositivos base do plano (1, 2, 3 e 4 respetivamente).
- * extraDevicePrice: custo por dispositivo adicional além do incluído no plano.
+ * Tabela de preços do iptvbr.pt (setembro 2026): duração × 1 a 4 dispositivos.
  */
 type PricingPlan = {
   id: string;
   name: string;
   price: string;
+  devicePrices: Record<1 | 2 | 3 | 4, string>;
   period: string;
   billedNote: string;
   highlight: boolean;
   badge?: string;
   cta: string;
   features: string[];
-  baseDevices: number;
-  extraDevicePrice: string;
   durationLabel: string;
 };
 
@@ -245,13 +241,12 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: "mensal",
     name: "Mensal",
-    price: "15,00",
+    price: "12,99",
+    devicePrices: { 1: "12,99", 2: "19,99", 3: "26,99", 4: "32,99" },
     period: "/mês",
     billedNote: "Faturado mensalmente",
     highlight: false,
     cta: "Escolher Mensal",
-    baseDevices: 1,
-    extraDevicePrice: "9,00",
     durationLabel: "1 mês",
     features: [
       "Qualidade de streaming 4K Ultra HD",
@@ -267,14 +262,13 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: "trimestral",
     name: "Trimestral",
-    price: "46,00",
+    price: "22,99",
+    devicePrices: { 1: "22,99", 2: "36,99", 3: "47,99", 4: "57,99" },
     period: "/3 meses",
-    billedNote: "≈ €15,33/mês",
+    billedNote: "≈ €7,66/mês para 1 dispositivo",
     highlight: true,
     badge: "Mais escolhido",
     cta: "Escolher Trimestral",
-    baseDevices: 2,
-    extraDevicePrice: "13,00",
     durationLabel: "3 meses",
     features: [
       "Qualidade de streaming 4K Ultra HD",
@@ -290,13 +284,12 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: "semestral",
     name: "Semestral",
-    price: "100,00",
+    price: "34,99",
+    devicePrices: { 1: "34,99", 2: "54,99", 3: "69,99", 4: "84,99" },
     period: "/6 meses",
-    billedNote: "≈ €16,67/mês",
+    billedNote: "≈ €5,83/mês para 1 dispositivo",
     highlight: false,
     cta: "Escolher Semestral",
-    baseDevices: 3,
-    extraDevicePrice: "20,00",
     durationLabel: "6 meses",
     features: [
       "Qualidade de streaming 4K Ultra HD",
@@ -312,14 +305,13 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: "anual",
     name: "Anual",
-    price: "169,00",
+    price: "49,99",
+    devicePrices: { 1: "49,99", 2: "74,99", 3: "94,99", 4: "114,99" },
     period: "/ano",
-    billedNote: "≈ €14,08/mês",
+    billedNote: "≈ €4,17/mês para 1 dispositivo",
     highlight: false,
     badge: "Melhor valor",
     cta: "Escolher Anual",
-    baseDevices: 4,
-    extraDevicePrice: "25,00",
     durationLabel: "12 meses",
     features: [
       "Qualidade de streaming 4K Ultra HD",
@@ -394,7 +386,7 @@ export const howItWorks = [
 ] as const;
 
 export const comparisonRows = [
-  { label: "Preço médio mensal", iptv: "Desde €15", cable: "€35–90" },
+  { label: "Preço médio mensal", iptv: "Desde €4,17", cable: "€35–90" },
   { label: "Fidelização", iptv: "Sem contrato", cable: "12–24 meses" },
   { label: "Canais desportivos extra", iptv: "Incluídos", cable: "Pacote adicional pago" },
   { label: "Dispositivos suportados", iptv: "Smart TV, box, telemóvel, PC", cable: "Apenas com equipamento da operadora" },
@@ -488,7 +480,7 @@ export const blogPosts: BlogPost[] = [
       { type: "p", text: "Outro erro comum é assinar diretamente um plano anual sem antes confirmar a compatibilidade com o teu dispositivo. Cada aparelho — Smart TV Samsung, Fire TV Stick, Android Box, iPhone ou computador — tem aplicações recomendadas diferentes, e nem todas as apps funcionam da mesma forma em todos os ecrãs. Convém verificar isto com antecedência." },
       { type: "h2", text: "O que esperar em termos de preço" },
       { type: "p", text: "Em 2026, um plano mensal de qualidade em Portugal ronda os 7€ a 13€, com opções trimestrais, semestrais e anuais a oferecerem poupança progressiva por mês. Preços muito abaixo desta faixa, sobretudo em planos anuais, costumam significar servidores sobrecarregados. Preços muito acima também não garantem necessariamente melhor qualidade — o que importa é a relação entre o valor pago e a estabilidade demonstrada durante o período de teste." },
-      { type: "p", text: "Se já sabes o que procurar, o próximo passo lógico é comparar diretamente os planos disponíveis e confirmar qual duração faz mais sentido para o teu caso. Consulta a nossa [página de planos e preços](/planos) para veres todas as opções lado a lado, incluindo o número de dispositivos incluído em cada uma." },
+      { type: "p", text: "Se já sabes o que procurar, compara os planos disponíveis e escolhe a duração e o número de dispositivos que precisas. Consulta a nossa [página de planos e preços](/planos) para veres todas as opções lado a lado." },
       { type: "h2", text: "Fornecedor direto ou revendedor: percebe a diferença" },
       { type: "p", text: "Uma distinção que raramente é explicada, mas que ajuda a entender o mercado, é a diferença entre um fornecedor que opera a sua própria infraestrutura e um revendedor que compra acesso em massa a um painel de terceiros para depois revender com margem. Nenhum dos dois modelos é automaticamente mau — muitos revendedores oferecem excelente suporte e preços justos — mas quanto mais camadas existirem entre ti e o servidor físico, menor a tua capacidade de perceber a origem real de eventuais problemas de estabilidade, e menor também a probabilidade de o fornecedor conseguir resolver um problema rapidamente, já que também depende de terceiros." },
       { type: "p", text: "Na prática, não precisas de saber classificar tecnicamente cada fornecedor neste espectro. O que importa é usares o mesmo critério pragmático: testa o serviço, avalia a velocidade de resposta do suporte a um problema real, e decide com base nessa experiência direta — não na estrutura de negócio por trás do serviço." },
@@ -713,7 +705,7 @@ export const blogPosts: BlogPost[] = [
       ] },
       { type: "p", text: "Se depois desta verificação o problema persistir, o nosso [guia detalhado sobre buffering e cortes no IPTV](/blog/resolver-buffering-cortes-iptv) explica passo a passo como diagnosticar a causa exata e o que pedir ao suporte técnico do teu fornecedor." },
       { type: "h2", text: "Vale a pena um plano com mais dispositivos para ver desporto em grupo?" },
-      { type: "p", text: "Se costumas juntar família ou amigos para ver jogos em mais do que uma divisão da casa, ou em casas diferentes, vale a pena considerar planos com mais dispositivos incluídos em simultâneo em vez de partilhar um único acesso — o que pode causar quebras quando duas pessoas tentam ver canais diferentes ao mesmo tempo com a mesma conta. Os nossos planos trimestral, semestral e anual incluem progressivamente mais dispositivos simultâneos, precisamente para cobrir este cenário sem perda de qualidade." },
+      { type: "p", text: "Se costumas juntar família ou amigos para ver jogos em mais do que uma divisão da casa, escolhe uma opção com o número de dispositivos simultâneos de que precisas, em vez de partilhar um único acesso. Em cada duração podes escolher de 1 a 4 dispositivos e ver o preço antes de encomendar." },
       { type: "h2", text: "Canais lineares vs. catch-up: o que muda para desporto" },
       { type: "p", text: "Nem todos os planos IPTV incluem catch-up TV (a possibilidade de veres um jogo que já passou, dentro de uma janela de alguns dias), e vale a pena perceber a diferença antes de assumires que está incluído. Os canais desportivos lineares transmitem o jogo apenas no momento em que decorre, exatamente como uma televisão tradicional — se perderes o início, perdes essa parte, a menos que o teu plano inclua especificamente a funcionalidade de catch-up ou gravação. Os nossos planos semestral e anual incluem catch-up TV até sete dias, útil para quem não consegue ver sempre em direto mas quer rever jogos mais tarde." },
       { type: "h2", text: "Como preparar a casa para ver jogos em grupo sem cortes" },
@@ -834,7 +826,7 @@ export const blogPosts: BlogPost[] = [
       { type: "h2", text: "Como avaliar se um preço é justo" },
       { type: "p", text: "Em vez de procurares o preço mais baixo possível, compara sempre o preço com o que está efetivamente incluído: número de dispositivos em simultâneo, existência de suporte em português, política de reembolso publicada, e — mais importante — a possibilidade de testar a estabilidade antes de te comprometeres com um plano longo. Um preço ligeiramente mais alto que vem acompanhado destas garantias vale, quase sempre, mais do que um preço mínimo sem qualquer transparência." },
       { type: "h2", text: "O que está incluído nos nossos planos" },
-      { type: "p", text: "Os nossos planos seguem exatamente estas faixas de mercado, com transparência total sobre o que cada duração inclui — desde o número de dispositivos simultâneos até às funcionalidades extra como catch-up TV e prioridade de suporte nos planos mais longos. Podes ver [todos os detalhes na página de planos](/planos), lado a lado, sem letras pequenas escondidas." },
+      { type: "p", text: "Os nossos planos mostram o preço total por duração e pelo número de dispositivos simultâneos escolhido, com as funcionalidades anunciadas na página de planos. Podes ver [todos os detalhes na página de planos](/planos), lado a lado, sem letras pequenas escondidas." },
       { type: "h2", text: "Custos escondidos a que deves prestar atenção" },
       { type: "p", text: "Para além do preço base do plano, alguns fornecedores acrescentam custos que só descobres depois de já teres decidido subscrever. O mais comum é o custo por dispositivo adicional em simultâneo — se precisares de ver em duas televisões ao mesmo tempo em casas diferentes, ou partilhares o acesso com família, confirma antecipadamente quanto custa cada dispositivo extra além do incluído no plano base. Outro custo menos óbvio é a taxa de reativação em caso de troca de televisão ou dispositivo, aplicável sobretudo em métodos de emparelhamento por endereço MAC como a Smart IPTV." },
       { type: "p", text: "Antes de assinares, pede sempre uma lista completa e por escrito de qualquer custo adicional possível, para poderes comparar o custo total real entre fornecedores, e não apenas o preço de anúncio mais visível." },
@@ -843,7 +835,7 @@ export const blogPosts: BlogPost[] = [
       { type: "h2", text: "Perguntas frequentes sobre preços de IPTV" },
       { type: "h3", text: "Vale a pena pagar mais por um plano anual logo à partida?" },
       { type: "p", text: "Só depois de teres confirmado a estabilidade do serviço num plano mais curto. Recomendamos sempre testar primeiro um mês ou um trimestre antes de te comprometeres com doze meses." },
-      { type: "h3", text: "Porque é que alguns planos incluem mais dispositivos do que outros?" },
+      { type: "h3", text: "Como muda o preço com mais dispositivos?" },
       { type: "p", text: "É uma forma de recompensar compromissos mais longos — quanto maior a duração escolhida, mais dispositivos simultâneos costumam estar incluídos sem custo extra, refletindo a redução de custo por mês que o fornecedor já está a aplicar." },
       { type: "h3", text: "Um preço mais alto garante sempre melhor qualidade?" },
       { type: "p", text: "Não necessariamente — o preço por si só não é garantia de nada. O que importa é a combinação de preço razoável dentro da faixa de mercado, transparência sobre o serviço e possibilidade real de testares antes de pagares um plano longo." },
@@ -2653,7 +2645,7 @@ export const blogPosts: BlogPost[] = [
       { type: "h2", text: "O que é IPTV, em termos simples" },
       { type: "p", text: "IPTV significa \"Internet Protocol Television\" — é simplesmente a entrega de sinal de televisão através de uma ligação à internet, em vez de cabo coaxial, satélite ou antena terrestre. Não é uma tecnologia nova ou exótica: os próprios operadores portugueses de telecomunicações (MEO, NOS, Vodafone) usam IPTV nas suas caixas de televisão, exatamente da mesma forma técnica que qualquer fornecedor independente. A diferença entre os vários serviços disponíveis no mercado está no catálogo de canais oferecido, na estabilidade da infraestrutura por trás, e na origem dos direitos de transmissão de cada conteúdo — não na tecnologia em si." },
       { type: "h2", text: "Quanto custa um serviço IPTV em Portugal" },
-      { type: "p", text: "Em 2026, um plano mensal de qualidade em Portugal ronda entre os 7€ e os 15€, com opções trimestrais, semestrais e anuais a oferecerem poupança progressiva por mês à medida que o compromisso se alarga. Preços muito abaixo desta faixa, sobretudo em planos anuais ou \"vitalícios\", costumam indicar servidores sobrecarregados ou um modelo de negócio insustentável a longo prazo. Analisamos esta faixa de preços com muito mais detalhe, incluindo o que está normalmente incluído em cada nível, no nosso [guia sobre quanto custa o IPTV em Portugal](/blog/quanto-custa-iptv-portugal-2026), e explicamos os métodos de pagamento mais seguros no nosso [guia sobre pagamentos IPTV](/blog/pagamento-metodos-iptv-portugal). Consulta diretamente os [nossos planos](/planos) para veres preços atuais e o número de dispositivos incluído em cada opção." },
+      { type: "p", text: "Em 2026, um plano mensal de qualidade em Portugal ronda entre os 7€ e os 15€, com opções trimestrais, semestrais e anuais a oferecerem poupança progressiva por mês à medida que o compromisso se alarga. Preços muito abaixo desta faixa, sobretudo em planos anuais ou \"vitalícios\", costumam indicar servidores sobrecarregados ou um modelo de negócio insustentável a longo prazo. Analisamos esta faixa de preços com muito mais detalhe, incluindo o que está normalmente incluído em cada nível, no nosso [guia sobre quanto custa o IPTV em Portugal](/blog/quanto-custa-iptv-portugal-2026), e explicamos os métodos de pagamento mais seguros no nosso [guia sobre pagamentos IPTV](/blog/pagamento-metodos-iptv-portugal). Consulta diretamente os [nossos planos](/planos) para veres preços atuais e o preço para o número de dispositivos escolhido." },
       { type: "h2", text: "IPTV é legal em Portugal?" },
       { type: "p", text: "A tecnologia IPTV em si não tem nada de ilegal — é neutra do ponto de vista jurídico, tal como qualquer outro método de entrega de sinal de televisão. O que determina se um serviço específico está dentro da lei são os direitos de transmissão que esse fornecedor detém para os canais que distribui. Antes de assinares qualquer serviço, vale a pena confirmar sinais de seriedade como termos de utilização claros, política de reembolso publicada e presença online estável ao longo do tempo. Explicamos este enquadramento com muito mais profundidade, incluindo o que a lei portuguesa e europeia dizem exatamente sobre o tema, no nosso [guia completo sobre a legalidade do IPTV em Portugal](/blog/iptv-e-legal-em-portugal)." },
       { type: "h2", text: "IPTV vs. operadoras tradicionais e streaming" },
@@ -2695,7 +2687,7 @@ export const blogPosts: BlogPost[] = [
       { type: "h3", text: "Vale a pena ter IPTV e Netflix/Disney+ ao mesmo tempo?" },
       { type: "p", text: "Para muitas pessoas sim, já que resolvem necessidades diferentes — IPTV cobre canais em direto e desporto, enquanto as plataformas de streaming cobrem bibliotecas fechadas de filmes e séries a pedido, como detalhamos no [guia de comparação dedicado](/blog/iptv-vs-streaming-netflix-disney)." },
       { type: "h3", text: "Onde posso ver os preços e planos disponíveis?" },
-      { type: "p", text: "Consulta a nossa [página de planos e preços](/planos) para veres todas as opções lado a lado, incluindo o número de dispositivos incluído em cada plano, ou [fala diretamente connosco](/contacto) e conhece [mais sobre nós](/sobre-nos) se tiveres qualquer dúvida antes de decidires." },
+      { type: "p", text: "Consulta a nossa [página de planos e preços](/planos) para veres todas as opções lado a lado, incluindo os preços para 1 a 4 dispositivos, ou [fala diretamente connosco](/contacto) e conhece [mais sobre nós](/sobre-nos) se tiveres qualquer dúvida antes de decidires." },
     ],
   },
 ];

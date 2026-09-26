@@ -27,7 +27,7 @@ export async function GET() {
           <span style={{ fontSize: 21, color: "#dae7f5" }}>+25.000 canais · filmes e séries em 4K</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 20, fontSize: 19, fontWeight: 750 }}>
-          <span style={{ display: "flex", padding: "12px 20px", borderRadius: 99, background: "#288cf5", color: "#fff" }}>DESDE 15€/MÊS</span>
+          <span style={{ display: "flex", padding: "12px 20px", borderRadius: 99, background: "#288cf5", color: "#fff" }}>DESDE 12,99€/MÊS</span>
           <span style={{ color: "#dce9f7" }}>Sem fidelização</span>
         </div>
       </div>

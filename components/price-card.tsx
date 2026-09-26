@@ -10,14 +10,13 @@ type Plan = {
   id: string;
   name: string;
   price: string;
+  devicePrices: Record<1 | 2 | 3 | 4, string>;
   period: string;
   billedNote: string;
   highlight: boolean;
   badge?: string;
   cta: string;
   features: string[];
-  baseDevices: number;
-  extraDevicePrice: string;
   durationLabel: string;
 };
 
@@ -30,13 +29,9 @@ function toPt(value: number) {
 }
 
 export function PriceCard({ plan }: { plan: Plan }) {
-  const [devices, setDevices] = useState(plan.baseDevices);
-  const maxDevices = plan.baseDevices + 6;
-
-  const basePrice = toNumber(plan.price);
-  const extraPrice = toNumber(plan.extraDevicePrice);
-  const extraDevices = Math.max(0, devices - plan.baseDevices);
-  const total = basePrice + extraDevices * extraPrice;
+  const [devices, setDevices] = useState<1 | 2 | 3 | 4>(1);
+  const total = toNumber(plan.devicePrices[devices]);
+  const months = Number.parseInt(plan.durationLabel, 10);
 
   const message =
     `Olá! 👋 Quero subscrever o plano ${plan.name} (${plan.durationLabel}) ` +
@@ -52,7 +47,7 @@ export function PriceCard({ plan }: { plan: Plan }) {
       <p className="price-amount">
         <span>€</span>{toPt(total)}<small>{plan.period}</small>
       </p>
-      <p className="price-note">{plan.billedNote}</p>
+      <p className="price-note">{months === 1 ? "Preço total" : `≈ €${toPt(total / months)}/mês`}</p>
 
       <div className="device-stepper">
         <span className="device-stepper-label">Dispositivos em simultâneo</span>
@@ -60,8 +55,8 @@ export function PriceCard({ plan }: { plan: Plan }) {
           <button
             type="button"
             className="device-stepper-btn"
-            onClick={() => setDevices((d) => Math.max(plan.baseDevices, d - 1))}
-            disabled={devices <= plan.baseDevices}
+            onClick={() => setDevices((d) => Math.max(1, d - 1) as 1 | 2 | 3 | 4)}
+            disabled={devices <= 1}
             aria-label="Menos um dispositivo"
           >
             −
@@ -70,21 +65,14 @@ export function PriceCard({ plan }: { plan: Plan }) {
           <button
             type="button"
             className="device-stepper-btn"
-            onClick={() => setDevices((d) => Math.min(maxDevices, d + 1))}
-            disabled={devices >= maxDevices}
+            onClick={() => setDevices((d) => Math.min(4, d + 1) as 1 | 2 | 3 | 4)}
+            disabled={devices >= 4}
             aria-label="Mais um dispositivo"
           >
             +
           </button>
         </div>
-        {extraDevices > 0 ? (
-          <span className="device-stepper-extra">
-            {plan.baseDevices} incluído{plan.baseDevices > 1 ? "s" : ""} + {extraDevices} extra
-            {extraDevices > 1 ? "s" : ""} (€{plan.extraDevicePrice} cada)
-          </span>
-        ) : (
-          <span className="device-stepper-extra">{plan.baseDevices} incluído{plan.baseDevices > 1 ? "s" : ""} no plano</span>
-        )}
+        <span className="device-stepper-extra">Preço total para {devices} dispositivo{devices > 1 ? "s" : ""}</span>
       </div>
 
       <ul className="price-features">
